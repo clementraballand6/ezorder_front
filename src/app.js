@@ -8,8 +8,12 @@ if (module.hot) {
 // libs
 require('./node_modules/angular');
 require('./node_modules/@uirouter/angularjs/lib');
-//modules
+
+// modules
 require('./modules/common');
+
+// routes
+require('./modules/routes');
 
 var deps = [
     "ui.router",
