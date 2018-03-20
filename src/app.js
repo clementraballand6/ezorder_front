@@ -12,9 +12,6 @@ require('./node_modules/@uirouter/angularjs/lib');
 // modules
 require('./modules/common');
 
-// routes
-require('./modules/routes');
-
 var deps = [
     "ui.router",
     "app.common"

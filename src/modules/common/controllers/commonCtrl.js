@@ -1,7 +1,7 @@
 function commonCtrl() {
     var self = this;
 
-    self.msg = "Hello world!";
+    self.msg = "";
 
     return self;
 }
