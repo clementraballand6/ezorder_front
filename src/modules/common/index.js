@@ -11,6 +11,6 @@ angular.module("app.common")
         }).state({
             name: 'about',
             url: '/about',
-            template: ''
+            template: 'test255'
         })
     });
