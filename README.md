@@ -6,14 +6,15 @@
 ``` bash
 # install dev dependencies
 npm install
- 
-# install module bundler (parcel)
-npm install -g parcel-bundler
+
+# install global packages to run dev env
+npm run install-tools
  
 # install front dependencies
 cd ./src
 npm install
  
 # run dev server
-npm run live
+npm run watch
+npm run bs
 ```
