@@ -4,5 +4,5 @@ npm-debug.log.*
 src/npm-debug.log.*
 *.iml
 .idea
-dist/bundle.js
+dist
 .cache
