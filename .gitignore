@@ -1,6 +1,8 @@
 node_modules
 src/node_modules
+npm-debug.log.*
+src/npm-debug.log.*
 *.iml
 .idea
-dist
+dist/bundle.js
 .cache
