@@ -67,7 +67,7 @@ module.exports = {
     "reloadThrottle": 0,
     "plugins": [],
     "injectChanges": true,
-    "startPath": null,
+    "startPath": "/site",
     "minify": true,
     "host": null,
     "localOnly": false,
