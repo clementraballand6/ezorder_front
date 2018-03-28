@@ -1,6 +1,7 @@
 angular.module("app.common", []);
 
 require('./controllers/commonCtrl');
+require('./services/commonService');
 
 angular.module("app.common")
     .config(function ($stateProvider) {

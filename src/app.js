@@ -1,6 +1,6 @@
 // libs
-window.jQuery = require('jquery/dist/jquery.min');
-window.$ = window.jQuery;
+window["jQuery"] = require('jquery/dist/jquery.min');
+window["$"] = window["jQuery"];
 require('popper.js/dist/umd/popper.min');
 require('bootstrap/dist/js/bootstrap.min');
 require('jquery-slimscroll/jquery.slimscroll.min');
@@ -11,10 +11,20 @@ require('@uirouter/angularjs/lib');
 
 // modules
 require('./modules/common');
+require('./modules/menu');
 
 var deps = [
     "ui.router",
-    "app.common"
+    "app.common",
+    "app.menu"
 ];
 
-angular.module('app', deps);
+angular.module('app', deps)
+    .run(function (commonService, $rootScope) {
+        $rootScope.isLoading = true;
+        console.log("dddd");
+        commonService.setUserType("order");
+    })
+    .config(function ($urlRouterProvider) {
+        $urlRouterProvider.otherwise('/');
+    });

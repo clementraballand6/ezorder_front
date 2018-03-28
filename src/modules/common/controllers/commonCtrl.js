@@ -3,6 +3,7 @@ function commonCtrl() {
 
     self.msg = "";
 
+
     return self;
 }
 
