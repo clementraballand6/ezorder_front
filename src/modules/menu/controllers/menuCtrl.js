@@ -3,8 +3,6 @@ function menuCtrl(commonService, $rootScope) {
 
     self.labels = commonService.user.labels;
 
-    $rootScope.isLoading = false;
-
     return self;
 }
 

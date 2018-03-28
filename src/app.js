@@ -19,9 +19,19 @@ var deps = [
     "app.menu"
 ];
 
-angular.module('app', deps)
-    .run(function (commonService, $rootScope) {
+function stateEvents($rootScope, $transitions) {
+    $transitions.onStart({}, function (trans) {
         $rootScope.isLoading = true;
+    });
+
+    $transitions.onStart({}, function (trans) {
+        $rootScope.isLoading = false;
+    });
+}
+
+angular.module('app', deps)
+    .run(stateEvents)
+    .run(function (commonService, $rootScope) {
         console.log("dddd");
         commonService.setUserType("order");
     })
