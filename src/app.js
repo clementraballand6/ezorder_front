@@ -7,6 +7,10 @@ require('jquery-slimscroll/jquery.slimscroll.min');
 require('fastclick/lib/fastclick');
 require('admin-lte/dist/js/adminlte.min');
 require('angular');
+require('angular-cookies');
+require('angular-animate');
+require('angular-sanitize');
+require('ng-toast');
 require('@uirouter/angularjs/lib');
 
 // modules
@@ -14,27 +18,85 @@ require('./modules/common');
 require('./modules/menu');
 
 var deps = [
+    "ngAnimate",
+    "ngSanitize",
+    "ngCookies",
+    "ngToast",
     "ui.router",
     "app.common",
     "app.menu"
 ];
 
-function stateEvents($rootScope, $transitions) {
-    $transitions.onStart({}, function (trans) {
+var restUrls = {
+    ezorders: "http://vps489645.ovh.net/preprod_api"
+    //ezorders: "http://localhost:8080"
+};
+
+function commonRun(commonService, $state) {
+
+}
+
+function handle401($httpProvider) {
+    $httpProvider.interceptors.push(function ($q, $state, ngToast, authService) {
+        return {
+            'responseError': function (rejection) {
+                if (rejection.status === 401) {
+                    ngToast.danger("Vous avez été deconnecté");
+                    authService.setAuthentified(false);
+                    $state.go("login");
+                }
+                throw rejection;
+            }
+        };
+    });
+}
+
+function toasterConfig(ngToastProvider) {
+    ngToastProvider.configure({
+        verticalPosition: 'middle',
+        horizontalPosition: 'center',
+        maxNumber: 3,
+        animation: 'fade'
+    });
+}
+
+function stateEvents($rootScope, $transitions, $state, authService) {
+    $transitions.onBefore({}, function (trans) {
+        console.log(trans.from());
         $rootScope.isLoading = true;
+        if (!authService.isAuthentified() && trans.to().name !== "login") {
+            $rootScope.currentState = trans.to();
+            return trans.router.stateService.target('login');
+        } else if (authService.isAuthentified() && trans.to().name === "login") {
+            if (trans.from().name === "") {
+                return trans.router.stateService.target('main.home');
+            } else {
+                return false;
+            }
+        }
+        $rootScope.currentState = trans.to();
     });
 
-    $transitions.onStart({}, function (trans) {
+    $transitions.onSuccess({}, function (trans) {
+        $rootScope.isLoading = false;
+    });
+
+    $transitions.onError({}, function (trans) {
         $rootScope.isLoading = false;
     });
 }
 
 angular.module('app', deps)
     .run(stateEvents)
-    .run(function (commonService, $rootScope) {
-        console.log("dddd");
+    .run(commonRun)
+    .run(function (commonService, $state, $rootScope) {
+        $rootScope.currentState = $state.current;
         commonService.setUserType("order");
     })
-    .config(function ($urlRouterProvider) {
+    .config(function ($urlRouterProvider, $httpProvider) {
         $urlRouterProvider.otherwise('/');
-    });
+        $httpProvider.defaults.withCredentials = true;
+    })
+    .config(handle401)
+    .config(toasterConfig)
+    .constant("REST", restUrls);

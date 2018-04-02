@@ -1,0 +1,19 @@
+<div class="wrapper" data-ng-if="!$root.isLoading">
+    <ng-include src="'./modules/menu/partials/header.html'"></ng-include>
+    <!-- =============================================== -->
+
+    <!-- Left side column. contains the sidebar -->
+    <ng-include src="'./modules/menu/partials/sidebar.html'"></ng-include>
+
+    <!-- =============================================== -->
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <ui-view></ui-view>
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Control Sidebar -->
+    <ng-include src="'./modules/menu/partials/aside.html'"></ng-include>
+
+</div>

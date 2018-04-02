@@ -1,0 +1,32 @@
+<div class="login-box">
+    <div class="login-logo">
+        <a href="../../index2.html"><b>Ez</b>orders</a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg">Connexion à l'appliation</p>
+
+        <form data-ng-submit="cCtrl.auth()">
+            <div class="form-group has-feedback">
+                <input type="email" class="form-control" placeholder="Email" data-ng-model="cCtrl.user.login">
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" class="form-control" placeholder="Mot de passe" data-ng-model="cCtrl.user.password">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="row">
+                <div class="col-xs-7">
+                </div>
+                <!-- /.col -->
+                <div class="col-xs-5">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Se connecter</button>
+                </div>
+                <!-- /.col -->
+            </div>
+        </form>
+        <a href="register.html" class="text-center">Créer un compte</a>
+
+    </div>
+    <!-- /.login-box-body -->
+</div>

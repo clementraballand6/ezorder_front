@@ -1,7 +1,11 @@
+<!DOCTYPE html>
 <html ng-app="app">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <style>
+    </style>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
@@ -9,12 +13,19 @@
     <link rel="stylesheet" href="./node_modules/ionicons/dist/css/ionicons.min.css">
     <link rel="stylesheet" href="./node_modules/admin-lte/dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="./node_modules/admin-lte/dist/css/skins/skin-red.min.css">
+    <link rel="stylesheet" href="./node_modules/ng-toast/dist/ngToast.min.css">
+    <link rel="stylesheet" href="./node_modules/ng-toast/dist/ngToast-animations.min.css">
     <link rel="stylesheet" href="./modules/css/custom.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <title>Document</title>
 </head>
-<body data-ng-controller="menuCtrl as mCtrl" class="hold-transition skin-red sidebar-mini">
-
+<body data-ng-controller="menuCtrl as mCtrl" class="hold-transition"
+      data-ng-class="
+      {'login-page hold-transition': $root.currentState.name === 'login',
+      'fixed skin-red sidebar-mini': $root.currentState.name.indexOf('main.') !== -1}
+">
+<toast></toast>
 <div class="container" data-ng-if="$root.isLoading">
     <div class="row" style="height: 100%;width: 100%;">
         <div class="col-md-12" style="top: 25%">
@@ -35,26 +46,7 @@
         </div>
     </div>
 </div>
-<div class="wrapper" data-ng-if="!$root.isLoading">
-    <ng-include src="'./modules/menu/partials/header.html'"></ng-include>
-    <!-- =============================================== -->
-
-    <!-- Left side column. contains the sidebar -->
-    <ng-include src="'./modules/menu/partials/sidebar.html'"></ng-include>
-
-    <!-- =============================================== -->
-
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <ui-view></ui-view>
-    </div>
-    <!-- /.content-wrapper -->
-    <ng-include src="'./modules/menu/partials/footer.html'"></ng-include>
-
-    <!-- Control Sidebar -->
-    <ng-include src="'./modules/menu/partials/aside.html'"></ng-include>
-
-</div>
+<ui-view></ui-view>
 <script src="bundle.js"></script>
 <script>
     jQuery(document).ready(function () {
