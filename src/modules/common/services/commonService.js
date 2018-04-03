@@ -29,11 +29,23 @@ function commonService($http, REST) {
     }
 
     self.disconnect = function () {
-        return $http.delete(REST.ezorders + "/auth/signout");
+        return $http.delete(REST.ezorders + "/logout");
     }
 
     self.auth = function (user) {
         return $http.post(REST.ezorders + "/auth", user);
+    }
+
+    self.register = function (registration) {
+        return $http.post(REST.ezorders + "/register", {
+            "auth": {
+                "login": registration.email,
+                "password": registration.password
+            },
+            "info": {
+                "name": registration.shopName
+            }
+        });
     }
 
     self.isAuth = function () {

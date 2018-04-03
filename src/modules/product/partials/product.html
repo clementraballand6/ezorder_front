@@ -1,0 +1,43 @@
+<section class="content">
+    <div class="col-md-12">
+        <button class="btn btn-success margin-bottom" onclick="$('#addProduct').modal('show')">Ajouter un produit
+        </button>
+
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Produits</h3>
+                <div class="box-tools">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                        <input type="text" data-ng-model="pCtrl.search" name="table_search" class="form-control pull-right" placeholder="Rechercher">
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+                <table class="table table-striped">
+                    <tbody>
+                    <tr>
+                        <th class="align-middle" style="width: 40%">Nom du produit</th>
+                        <th>Prix</th>
+                        <th style="width: 15%">Actif</th>
+                    </tr>
+                    <tr data-ng-repeat="product in pCtrl.products | filter: pCtrl.search">
+                        <td data-ng-bind="::product.name"></td>
+                        <td><span class="badge bg-blue">{{ ::product.price.toString() + "€" }}</span></td>
+                        <td>
+                            <button class="btn btn-xs"
+                                    data-ng-class="{'btn-danger': !product.enabled, 'btn-success': product.enabled}"
+                                    data-ng-click="product.enabled = !product.enabled">
+                                {{ product.enabled ? "Oui" : "Non" }}
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <ng-include src="'./modules/product/partials/modals/addProduct.html'"></ng-include>
+</section>

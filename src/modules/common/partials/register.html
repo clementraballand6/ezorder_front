@@ -1,0 +1,41 @@
+<div class="register-box">
+    <div class="register-logo">
+        <a href="../../index2.html"><b>Ez</b>orders</a>
+    </div>
+
+    <div class="register-box-body">
+        <p class="login-box-msg">Créer un compte</p>
+
+        <form data-ng-submit="cCtrl.register()">
+            <div class="form-group has-feedback">
+                <input required type="text" class="form-control" data-ng-model="cCtrl.register.shopName" placeholder="Nom du restaurant">
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input required type="email" class="form-control" data-ng-model="cCtrl.register.email" placeholder="Email">
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input required type="password" class="form-control" data-ng-model="cCtrl.register.password" placeholder="Mot de passe">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input required type="password" class="form-control" data-ng-model="cCtrl.register.passwordCheck" placeholder="Vérification du mot de passe">
+                <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                </div>
+                <!-- /.col -->
+                <div class="col-xs-6">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">S'enregistrer</button>
+                </div>
+                <!-- /.col -->
+            </div>
+        </form>
+
+        <a ui-sref="login" class="text-center">J'ai déjà un compte</a>
+    </div>
+    <!-- /.form-box -->
+</div>
+<!-- /.register-box -->

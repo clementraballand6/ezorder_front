@@ -16,6 +16,7 @@ require('@uirouter/angularjs/lib');
 // modules
 require('./modules/common');
 require('./modules/menu');
+require('./modules/product');
 
 var deps = [
     "ngAnimate",
@@ -24,7 +25,8 @@ var deps = [
     "ngToast",
     "ui.router",
     "app.common",
-    "app.menu"
+    "app.menu",
+    "app.product"
 ];
 
 var restUrls = {
@@ -64,10 +66,11 @@ function stateEvents($rootScope, $transitions, $state, authService) {
     $transitions.onBefore({}, function (trans) {
         console.log(trans.from());
         $rootScope.isLoading = true;
-        if (!authService.isAuthentified() && trans.to().name !== "login") {
+        if (!authService.isAuthentified() && trans.to().name !== "login" && trans.to().name !== "register") {
             $rootScope.currentState = trans.to();
             return trans.router.stateService.target('login');
         } else if (authService.isAuthentified() && trans.to().name === "login") {
+            $rootScope.currentState = trans.to();
             if (trans.from().name === "") {
                 return trans.router.stateService.target('main.home');
             } else {

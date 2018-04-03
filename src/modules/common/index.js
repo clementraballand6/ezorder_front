@@ -19,5 +19,11 @@ angular.module("app.common")
             controller: "commonCtrl",
             controllerAs: "cCtrl",
             templateUrl: "modules/common/partials/login.html"
+        }).state({
+            name: 'register',
+            url: '/register',
+            controller: "commonCtrl",
+            controllerAs: "cCtrl",
+            templateUrl: "modules/common/partials/register.html"
         })
     });
