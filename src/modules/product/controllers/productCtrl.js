@@ -14,16 +14,33 @@ function productCtrl(products, productService, ngToast, $filter) {
     }
 
     function updateProduct(product) {
-        console.log(product);
-        var index = self.products.indexOf(self.products.find(function (el) {
+        var el = self.products.find(function (el) {
             return el._id === product._id;
-        }));
-        self.products[index] = product;
+        });
+        console.log(product);
+        el.name = product.name;
+        el.price = product.price;
+        el.enabled = product.enabled;
+        el.composition = product.composition;
+        el.description = product.description;
     }
 
     self.showEditProduct = function (product) {
         self.product = angular.copy(product);
         $('#editProduct').modal('show');
+    }
+
+    self.toggleProductEnabled = function (product) {
+        var p = angular.copy(product);
+        p.enabled = !p.enabled;
+        productService.update(p)
+            .then(function (res) {
+                updateProduct(res.data.product);
+            })
+            .catch(function () {
+                console.log('test');
+                ngToast.danger("Erreur lors de la mise à jour");
+            })
     }
 
     self.showDeleteProduct = function (product) {

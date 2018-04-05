@@ -7,6 +7,7 @@ function productService($http, REST) {
     }
 
     self.add = function (product) {
+        product.enabled = true;
         return $http.post(REST.ezorders + "/customer/kitchen/products", product);
     }
 

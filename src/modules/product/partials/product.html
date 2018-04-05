@@ -1,4 +1,4 @@
-<section class="content">
+<section class="content no-padding">
     <div class="col-md-10 col-md-offset-1 no-padding">
         <div class="box">
             <div class="box-header">
@@ -21,12 +21,12 @@
                         <th class="float-right" style="width: 30%"></th>
                     </tr>
                     <tr data-ng-repeat="product in pCtrl.products | filter: pCtrl.search" data-ng-hide="product.removed">
-                        <td data-ng-bind="::product.name" style="text-align: center; vertical-align: middle;"></td>
-                        <td style="text-align: center; vertical-align: middle;"><span class="badge bg-blue">{{ ::product.price.toString() + "€" }}</span></td>
+                        <td data-ng-bind="product.name" style="text-align: center; vertical-align: middle;"></td>
+                        <td style="text-align: center; vertical-align: middle;"><span class="badge bg-blue">{{ product.price.toString() + "€" }}</span></td>
                         <td style="vertical-align: middle; text-align: center;">
                             <button class="btn"
                                     data-ng-class="{'btn-default': !product.enabled, 'btn-success': product.enabled}"
-                                    data-ng-click="product.enabled = !product.enabled">
+                                    data-ng-click="pCtrl.toggleProductEnabled(product)">
                                 {{ product.enabled ? "Oui" : "Non" }}
                             </button>
                         </td>

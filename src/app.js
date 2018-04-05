@@ -11,6 +11,7 @@ require('angular-cookies');
 require('angular-animate');
 require('angular-sanitize');
 require('ng-toast');
+require('angular-touch');
 require('@uirouter/angularjs/lib');
 
 // modules
@@ -20,6 +21,7 @@ require('./modules/product');
 
 var deps = [
     "ngAnimate",
+    "ngTouch",
     "ngSanitize",
     "ngCookies",
     "ngToast",
@@ -62,14 +64,14 @@ function toasterConfig(ngToastProvider) {
     });
 }
 
-function closeSideBar() {
-    $(document.body).removeClass('sidebar-open');
+function sidebar(action) {
+    action === "open" ? $(document.body).addClass('sidebar-open') : $(document.body).removeClass('sidebar-open');
 }
 
 function stateEvents($rootScope, $transitions, $state, authService) {
     $transitions.onBefore({}, function (trans) {
-        closeSideBar();
-        console.log("run2");
+        $rootScope.sidebar = sidebar;
+        sidebar("close");
         $rootScope.content.isLoading = true;
         if (!authService.isAuthentified() && trans.to().name !== "login" && trans.to().name !== "register") {
             $rootScope.currentState = trans.to();
@@ -104,7 +106,6 @@ function stateEvents($rootScope, $transitions, $state, authService) {
 
 angular.module('app', deps)
     .run(function (commonService, $state, $rootScope) {
-        console.log("run1");
         $rootScope.content = {isLoading: false};
         $rootScope.currentState = $state.current;
         commonService.setUserType("order");

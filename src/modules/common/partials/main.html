@@ -1,4 +1,6 @@
-<div class="wrapper" data-ng-if="!$root.isLoading">
+<div class="wrapper" data-ng-if="!$root.isLoading"
+     ng-swipe-right="$root.sidebar('open')"
+     ng-swipe-left="$root.sidebar('close')">
     <ng-include src="'./modules/menu/partials/header.html'"></ng-include>
     <!-- =============================================== -->
 
