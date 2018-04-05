@@ -62,10 +62,14 @@ function toasterConfig(ngToastProvider) {
     });
 }
 
+function closeSideBar() {
+    $(document.body).removeClass('sidebar-open');
+}
+
 function stateEvents($rootScope, $transitions, $state, authService) {
     $transitions.onBefore({}, function (trans) {
-        console.log(trans.from());
-        $rootScope.isLoading = true;
+        closeSideBar();
+        $rootScope.content.isLoading = true;
         if (!authService.isAuthentified() && trans.to().name !== "login" && trans.to().name !== "register") {
             $rootScope.currentState = trans.to();
             return trans.router.stateService.target('login');
@@ -81,11 +85,19 @@ function stateEvents($rootScope, $transitions, $state, authService) {
     });
 
     $transitions.onSuccess({}, function (trans) {
+        $rootScope.content.isLoading = false;
         $rootScope.isLoading = false;
     });
 
     $transitions.onError({}, function (trans) {
+        $rootScope.content.isLoading = false;
         $rootScope.isLoading = false;
+        if (trans.from().name === "") {
+            // ui router bug, use standard state.go to workaround
+            return $state.go('main.home');
+        } else {
+            return false;
+        }
     });
 }
 
@@ -93,6 +105,7 @@ angular.module('app', deps)
     .run(stateEvents)
     .run(commonRun)
     .run(function (commonService, $state, $rootScope) {
+        $rootScope.content = {isLoading: false};
         $rootScope.currentState = $state.current;
         commonService.setUserType("order");
     })

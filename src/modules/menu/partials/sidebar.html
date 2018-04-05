@@ -3,12 +3,12 @@
     <section class="sidebar">
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
-            <li>
+            <li ui-sref-active="active">
                 <a href="../widgets.html">
                     <i class="fa fa-plus"></i> <span>Commandes</span>
                 </a>
             </li>
-            <li>
+            <li ui-sref-active="active">
                 <a href="../widgets.html">
                     <i class="fa fa-tasks"></i> <span>Commandes en cours</span>
                     <span class="pull-right-container">
@@ -16,17 +16,22 @@
             </span>
                 </a>
             </li>
-            <li>
-                <a href="../widgets.html">
-                    <i class="fa fa-clipboard"></i> <span>Menus et produits</span>
+            <li ui-sref-active="active">
+                <a ui-sref="main.product">
+                    <i class="fa fa-list"></i> <span>Produits</span>
                 </a>
             </li>
-            <li>
+            <li ui-sref-active="active">
+                <a href="../widgets.html">
+                    <i class="fa fa-clipboard"></i> <span>Menus</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
                 <a href="../widgets.html">
                     <i class="fa fa-map-marker"></i> <span>Tables</span>
                 </a>
             </li>
-            <li>
+            <li ui-sref-active="active">
                 <a href="../widgets.html">
                     <i class="fa fa-gear"></i> <span>Paramètres</span>
                 </a>

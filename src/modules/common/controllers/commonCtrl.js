@@ -1,4 +1,4 @@
-function commonCtrl(commonService, authService, ngToast, $state) {
+function commonCtrl(commonService, authService, ngToast, $state, $rootScope) {
     var self = this;
 
     function onAuthSuccess() {
@@ -7,6 +7,7 @@ function commonCtrl(commonService, authService, ngToast, $state) {
     }
 
     function onAuthError() {
+        $rootScope.isLoading = false;
         ngToast.danger("Identifiants incorrects");
         authService.setAuthentified(false);
     }
@@ -17,6 +18,7 @@ function commonCtrl(commonService, authService, ngToast, $state) {
     }
 
     function onRegisterError() {
+        $rootScope.isLoading = false;
         ngToast.danger("Erreur lors de la création du compte, veuillez réessayer");
     }
 
@@ -24,6 +26,7 @@ function commonCtrl(commonService, authService, ngToast, $state) {
     self.register = {};
 
     self.auth = function () {
+        $rootScope.isLoading = true;
         commonService.auth(self.user)
             .then(onAuthSuccess)
             .catch(onAuthError);

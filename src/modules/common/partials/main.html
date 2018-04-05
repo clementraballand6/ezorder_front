@@ -9,11 +9,22 @@
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        <ui-view></ui-view>
+        <loader data-ng-if="$root.content.isLoading"></loader>
+        <div data-ng-if="!$root.content.isLoading">
+            <ui-view class="row"></ui-view>
+        </div>
     </div>
     <!-- /.content-wrapper -->
 
     <!-- Control Sidebar -->
     <ng-include src="'./modules/menu/partials/aside.html'"></ng-include>
+    <div class='clearfix'></div>
 
 </div>
+<script>
+    jQuery(document).ready(function () {
+        setTimeout(function () {
+            jQuery('div.content-wrapper').attr('style', 'min-height: ' + window.innerHeight + 'px')
+        },  200)
+    })
+</script>

@@ -2,115 +2,72 @@
     height: auto !important;
 }
 
+tr {
+    -webkit-transition:all linear 0.8s;
+    transition:all linear 0.8s;
+}
+tr.ng-hide {
+    opacity:0;
+}
 
-.loader{
-    width: 150px;
-    height: 150px;
-    margin: 40px auto;
-    transform: rotate(-45deg);
-    font-size: 0;
-    line-height: 0;
-    animation: rotate-loader 5s infinite;
-    padding: 25px;
-    border: 1px solid #cf303d;
+.modal {
+    text-align: center;
+    padding: 0!important;
 }
-.loader .loader-inner{
-    position: relative;
+
+.modal:before {
+    content: '';
     display: inline-block;
-    width: 50%;
-    height: 50%;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -4px;
 }
-.loader .loading{
+
+.modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+
+    position: relative;
+    margin-top: 26%;
+    margin-left: 46%;
+}
+
+.double-bounce1, .double-bounce2 {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #333;
+    opacity: 0.6;
     position: absolute;
-    background: #cf303d;
-}
-.loader .one{
-    width: 100%;
-    bottom: 0;
-    height: 0;
-    animation: loading-one 1s infinite;
-}
-.loader .two{
-    width: 0;
-    height: 100%;
-    left: 0;
-    animation: loading-two 1s infinite;
-    animation-delay: 0.25s;
-}
-.loader .three{
-    width: 0;
-    height: 100%;
-    right: 0;
-    animation: loading-two 1s infinite;
-    animation-delay: 0.75s;
-}
-.loader .four{
-    width: 100%;
     top: 0;
-    height: 0;
-    animation: loading-one 1s infinite;
-    animation-delay: 0.5s;
+    left: 0;
+
+    -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+    animation: sk-bounce 2.0s infinite ease-in-out;
 }
-@keyframes loading-one {
-    0% {
-        height: 0;
-        opacity: 1;
-    }
-    12.5% {
-        height: 100%;
-        opacity: 1;
-    }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        height: 100%;
-        opacity: 0;
-    }
+
+.double-bounce2 {
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
 }
-@keyframes loading-two {
-    0% {
-        width: 0;
-        opacity: 1;
-    }
-    12.5% {
-        width: 100%;
-        opacity: 1;
-    }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        width: 100%;
-        opacity: 0;
-    }
+
+@-webkit-keyframes sk-bounce {
+    0%, 100% { -webkit-transform: scale(0.0) }
+    50% { -webkit-transform: scale(1.0) }
 }
-@keyframes rotate-loader {
-    0% {
-        transform: rotate(-45deg);
-    }
-    20% {
-        transform: rotate(-45deg);
-    }
-    25% {
-        transform: rotate(-135deg);
-    }
-    45% {
-        transform: rotate(-135deg);
-    }
-    50% {
-        transform: rotate(-225deg);
-    }
-    70% {
-        transform: rotate(-225deg);
-    }
-    75% {
-        transform: rotate(-315deg);
-    }
-    95% {
-        transform: rotate(-315deg);
-    }
-    100% {
-        transform: rotate(-405deg);
-    }
+
+@keyframes sk-bounce {
+    0%, 100% {
+        transform: scale(0.0);
+        -webkit-transform: scale(0.0);
+    } 50% {
+          transform: scale(1.0);
+          -webkit-transform: scale(1.0);
+      }
 }

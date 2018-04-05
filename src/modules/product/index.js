@@ -9,7 +9,7 @@ angular.module("app.product")
             name: 'main.product',
             url: '/product',
             resolve: {
-                products: function (productService) {
+                products: function (productService, $rootScope) {
                     return productService.get().then(function (res) {
                         return res.data.products;
                     });

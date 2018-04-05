@@ -9,6 +9,9 @@ angular.module("app.common")
         $stateProvider.state({
             name: 'main.home',
             url: '/',
+            data: {
+                globalLoader: true
+            },
             templateUrl: "modules/common/partials/home.html"
         }).state({
             name: 'main',
@@ -26,4 +29,9 @@ angular.module("app.common")
             controllerAs: "cCtrl",
             templateUrl: "modules/common/partials/register.html"
         })
+    })
+    .directive('loader', function () {
+        return {
+            templateUrl: "modules/common/partials/loader.html"
+        };
     });

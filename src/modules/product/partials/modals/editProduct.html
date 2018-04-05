@@ -1,11 +1,11 @@
-<div class="modal fade" id="addProduct">
-    <div class="modal-dialog modal-success">
-        <form data-ng-submit="pCtrl.addProduct()">
+<div class="modal fade" id="editProduct">
+    <div class="modal-dialog">
+        <form data-ng-submit="pCtrl.editProduct()">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Créer un produit</h4>
+                    <h4 class="modal-title">Editer un produit</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -14,12 +14,12 @@
                                 <div class="box-body">
                                     <div class="row margin-bottom">
                                         <div class="col-xs-7">
-                                            <input type="text" data-ng-model="pCtrl.newProduct.name" required
+                                            <input type="text" data-ng-model="pCtrl.product.name" required
                                                    class="form-control" placeholder="Nom">
                                         </div>
                                         <div class="col-xs-5">
                                             <div class="input-group">
-                                                <input type="number" data-ng-model="pCtrl.newProduct.price"
+                                                <input type="number" data-ng-model="pCtrl.product.price"
                                                        placeholder="Prix" step="0.01" class="form-control">
                                                 <span class="input-group-addon">€</span>
                                             </div>
@@ -28,12 +28,12 @@
                                     <div class="row margin-bottom">
                                         <div class="col-xs-7">
                                             <textarea class="form-control" placeholder="Description"
-                                                      data-ng-model="pCtrl.newProduct.description"></textarea>
+                                                      data-ng-model="pCtrl.product.description"></textarea>
                                         </div>
                                         <div class="col-xs-5">
                                             <div class="input-group">
                                                 <select id="category" class="form-control"
-                                                        data-ng-model="pCtrl.newProduct.category">
+                                                        data-ng-model="pCtrl.product.category">
                                                     <option>Entrée</option>
                                                     <option>Plat</option>
                                                     <option>Dessert</option>
@@ -46,7 +46,7 @@
                                     <div class="row margin-bottom">
                                         <div class="col-xs-12">
                                             <textarea class="form-control" placeholder="Composition"
-                                                      data-ng-model="pCtrl.newProduct.composition"></textarea>
+                                                      data-ng-model="pCtrl.product.composition"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -57,7 +57,8 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Annuler</button>
-                    <button type="submit" class="btn btn-success">Créer</button>
+                    <button type="submit" class="btn btn-success"
+                    data-ng-class="{'disabled': pCtrl.blockEdition()}">Enregistrer</button>
                 </div>
             </div>
         </form>

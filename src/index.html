@@ -26,27 +26,8 @@
       'register-page hold-transition': $root.currentState.name === 'register',
       'fixed skin-red sidebar-mini': $root.currentState.name.indexOf('main.') !== -1}
 ">
+<loader data-ng-if="$root.isLoading"></loader>
 <toast></toast>
-<div class="container" data-ng-if="$root.isLoading">
-    <div class="row" style="height: 100%;width: 100%;">
-        <div class="col-md-12" style="top: 25%">
-            <div class="loader">
-                <div class="loader-inner">
-                    <div class="loading one"></div>
-                </div>
-                <div class="loader-inner">
-                    <div class="loading two"></div>
-                </div>
-                <div class="loader-inner">
-                    <div class="loading three"></div>
-                </div>
-                <div class="loader-inner">
-                    <div class="loading four"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <ui-view></ui-view>
 <script src="bundle.js"></script>
 <script>
