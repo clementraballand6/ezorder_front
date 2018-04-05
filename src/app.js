@@ -68,7 +68,7 @@ function closeSideBar() {
 
 function stateEvents($rootScope, $transitions, $state, authService) {
     $transitions.onBefore({}, function (trans) {
-        closeSideBar();
+        //closeSideBar();
         $rootScope.content.isLoading = true;
         if (!authService.isAuthentified() && trans.to().name !== "login" && trans.to().name !== "register") {
             $rootScope.currentState = trans.to();
