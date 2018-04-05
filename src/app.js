@@ -102,13 +102,13 @@ function stateEvents($rootScope, $transitions, $state, authService) {
 }
 
 angular.module('app', deps)
-    //.run(stateEvents)
-    .run(commonRun)
     .run(function (commonService, $state, $rootScope) {
         $rootScope.content = {isLoading: false};
         $rootScope.currentState = $state.current;
         commonService.setUserType("order");
     })
+    .run(stateEvents)
+    .run(commonRun)
     .config(function ($urlRouterProvider, $httpProvider) {
         $urlRouterProvider.otherwise('/');
         $httpProvider.defaults.withCredentials = true;
