@@ -17,13 +17,13 @@
                     <tr>
                         <th style="width: 30%; text-align: center;">Nom</th>
                         <th style="text-align: center;">Prix</th>
-                        <th style="width: 15%; text-align: center;">Actif</th>
+                        <th style="width: 20%; text-align: center;">Actif</th>
                         <th class="float-right" style="width: 30%"></th>
                     </tr>
                     <tr data-ng-repeat="product in pCtrl.products | filter: pCtrl.search" data-ng-hide="product.removed">
                         <td data-ng-bind="::product.name" style="text-align: center; vertical-align: middle;"></td>
                         <td style="text-align: center; vertical-align: middle;"><span class="badge bg-blue">{{ ::product.price.toString() + "€" }}</span></td>
-                        <td>
+                        <td style="vertical-align: middle; text-align: center;">
                             <button class="btn"
                                     data-ng-class="{'btn-default': !product.enabled, 'btn-success': product.enabled}"
                                     data-ng-click="product.enabled = !product.enabled">
