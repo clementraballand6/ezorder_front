@@ -69,6 +69,7 @@ function closeSideBar() {
 function stateEvents($rootScope, $transitions, $state, authService) {
     $transitions.onBefore({}, function (trans) {
         closeSideBar();
+        console.log("run2");
         $rootScope.content.isLoading = true;
         if (!authService.isAuthentified() && trans.to().name !== "login" && trans.to().name !== "register") {
             $rootScope.currentState = trans.to();
@@ -92,17 +93,18 @@ function stateEvents($rootScope, $transitions, $state, authService) {
     $transitions.onError({}, function (trans) {
         $rootScope.content.isLoading = false;
         $rootScope.isLoading = false;
-        if (trans.from().name === "") {
+        //if (trans.from().name === "") {
             // ui router bug, use standard state.go to workaround
-            return $state.go('main.home');
-        } else {
-            return false;
-        }
+          //  return $state.go('main.home');
+        //} else {
+          //  return false;
+        //}
     });
 }
 
 angular.module('app', deps)
     .run(function (commonService, $state, $rootScope) {
+        console.log("run1");
         $rootScope.content = {isLoading: false};
         $rootScope.currentState = $state.current;
         commonService.setUserType("order");
