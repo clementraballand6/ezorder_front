@@ -1,0 +1,82 @@
+<div class="modal fade" id="editMenu">
+    <div class="modal-dialog">
+        <form data-ng-submit="mCtrl.editMenu()">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Editer un menu</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="box box-default">
+                                <div class="box-body">
+                                    <div class="row margin-bottom">
+                                        <div class="col-xs-7">
+                                            <input type="text" data-ng-model="mCtrl.menu.name" required
+                                                   class="form-control" placeholder="Nom">
+                                        </div>
+                                        <div class="col-xs-5">
+                                            <div class="input-group">
+                                                <input type="number" data-ng-model="mCtrl.menu.price"
+                                                       placeholder="Prix" step="0.01" class="form-control">
+                                                <span class="input-group-addon">€</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box">
+                                <div class="box-header">
+                                    <h3 class="box-title">Produits</h3>
+                                    <div class="box-tools">
+                                        <div class="input-group input-group-sm" style="width: 150px;">
+                                            <input type="text" data-ng-model="mCtrl.search" name="table_search"
+                                                   class="form-control pull-right" placeholder="Rechercher">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.box-header -->
+                                <div class="box-body no-padding">
+                                    <table class="table table-striped" style="color: black !important;">
+                                        <tbody>
+                                        <tr>
+                                            <th style="width: 30%; text-align: center;">Nom</th>
+                                            <th style="text-align: center;">Prix</th>
+                                            <th class="float-right" style="width: 15%"></th>
+                                        </tr>
+                                        <tr data-ng-repeat="product in mCtrl.products | filter: mCtrl.search | orderBy: [mCtrl.menuHasProduct(mCtrl.menu), 'name']">
+                                            <td data-ng-bind="product.name"
+                                                style="text-align: center; vertical-align: middle;"></td>
+                                            <td style="text-align: center; vertical-align: middle;"><span
+                                                    class="badge bg-blue">{{ product.price.toString() + "€" }}</span>
+                                            </td>
+                                            <td style="vertical-align: middle; text-align: center;">
+                                                <i class="fa fa-2x"
+                                                   data-ng-click="mCtrl.toggleProduct(mCtrl.menu, product)"
+                                                   data-ng-class="{ 'fa-square-o': mCtrl.menu.products.indexOf(product._id) === -1,
+                                                                'fa-check-square-o': mCtrl.menu.products.indexOf(product._id) > -1 }"></i>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-success"
+                            data-ng-class="{'disabled': mCtrl.blockEdition()}">Editer
+                    </button>
+                </div>
+            </div>
+        </form>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

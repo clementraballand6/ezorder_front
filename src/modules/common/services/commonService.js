@@ -1,4 +1,4 @@
-function commonService($http, REST) {
+function commonService($http, REST, authService, ngToast, $state) {
     var self = this;
 
     self.user = {};

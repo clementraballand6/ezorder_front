@@ -2,10 +2,16 @@ function productCtrl(products, productService, ngToast, $filter) {
     var self = this;
 
     self.products = products;
-    console.log(products);
+
     self.newProduct = {
         price: 0
     };
+
+    function objectEqual(a, b) {
+        var c = angular.toJson(angular.fromJson(angular.toJson(a)));
+        var d = angular.toJson(angular.fromJson(angular.toJson(b)));
+        return c === d;
+    }
 
     function resetNewProduct() {
         self.newProduct = {
@@ -46,12 +52,6 @@ function productCtrl(products, productService, ngToast, $filter) {
     self.showDeleteProduct = function (product) {
         self.product = angular.copy(product);
         $('#deleteProduct').modal('show');
-    }
-
-    function objectEqual(a, b) {
-        var c = angular.toJson(angular.fromJson(angular.toJson(a)));
-        var d = angular.toJson(angular.fromJson(angular.toJson(b)));
-        return c === d;
     }
 
     self.blockEdition = function () {

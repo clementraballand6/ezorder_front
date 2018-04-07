@@ -16,8 +16,10 @@ require('@uirouter/angularjs/lib');
 
 // modules
 require('./modules/common');
+require('./modules/menus');
 require('./modules/menu');
 require('./modules/product');
+require('./modules/table');
 
 var deps = [
     "ngAnimate",
@@ -27,8 +29,10 @@ var deps = [
     "ngToast",
     "ui.router",
     "app.common",
+    "app.menus",
     "app.menu",
-    "app.product"
+    "app.product",
+    "app.table"
 ];
 
 var restUrls = {
@@ -45,9 +49,7 @@ function handle401($httpProvider) {
         return {
             'responseError': function (rejection) {
                 if (rejection.status === 401) {
-                    ngToast.danger("Vous avez été deconnecté");
-                    authService.setAuthentified(false);
-                    $state.go("login");
+                    authService.logout();
                 }
                 throw rejection;
             }
@@ -70,7 +72,9 @@ function sidebar(action) {
 
 function stateEvents($rootScope, $transitions, $state, authService) {
     $transitions.onBefore({}, function (trans) {
-        $rootScope.sidebar = sidebar;
+        !$rootScope.sidebar ? $rootScope.sidebar = sidebar : '';
+        $('.modal').modal('hide') // closes all active pop ups.
+        $('.modal-backdrop').remove() // removes the grey overlay.
         sidebar("close");
         $rootScope.content.isLoading = true;
         if (!authService.isAuthentified() && trans.to().name !== "login" && trans.to().name !== "register") {
@@ -105,10 +109,16 @@ function stateEvents($rootScope, $transitions, $state, authService) {
 }
 
 angular.module('app', deps)
-    .run(function (commonService, $state, $rootScope) {
+    .run(function (commonService, $state, $rootScope, authService) {
         $rootScope.content = {isLoading: false};
         $rootScope.currentState = $state.current;
-        commonService.setUserType("order");
+        commonService.setUserType("order");commonService.isAuth().then(function (res) {
+            if (!res.data.authentified) {
+                console.log("not auth");
+                authService.setAuthentified(false);
+                $state.go("login")
+            }
+        })
     })
     .run(stateEvents)
     .run(commonRun)

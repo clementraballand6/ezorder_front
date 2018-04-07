@@ -1,0 +1,61 @@
+<section class="content no-padding">
+    <div class="col-md-10 col-md-offset-1 no-padding" data-ng-if="tCtrl.tables.length">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Tables</h3>
+                <div class="box-tools">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                        <input type="text" data-ng-model="tCtrl.search" name="table_search"
+                               class="form-control pull-right" placeholder="Rechercher">
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+                <table class="table table-striped">
+                    <tbody>
+                    <tr class="fixed fixed-top">
+                        <th style="width: 10%; text-align: center;">Numéro</th>
+                        <th style="text-align: center;">Description</th>
+                        <th style="width: 10%; text-align: center;">Places</th>
+                        <th class="float-right" style="width: 30%"></th>
+                    </tr>
+                    <tr data-ng-repeat="table in tCtrl.tables | filter: tCtrl.search track by table._id" data-ng-hide="table.removed">
+                        <td data-ng-bind="table.num" style="text-align: center; vertical-align: middle;"></td>
+                        <td style="vertical-align: middle; text-align: center;" data-ng-bind="table.desc">
+                        <td style="vertical-align: middle; text-align: center;" data-ng-bind="table.places">
+                        </td>
+                        <td style="vertical-align: middle; text-align: center;">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-warning"
+                                        data-ng-click="tCtrl.showEditTable(table)"><i class="fa fa-edit"></i>
+                                </button>
+                                <button type="button" class="btn btn-default btn-danger"
+                                        data-ng-click="tCtrl.showDeleteTable(table)"><i class="fa fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <div class="col-md-10 col-md-offset-1" data-ng-if="!tCtrl.tables.length">
+        <div class="callout callout-info">
+            <h4>Aucun produit trouvé</h4>
+
+            <p>Créez votre premier produit !</p>
+        </div>
+    </div>
+    <ng-include src="'modules/table/partials/modals/addTable.html'"></ng-include>
+    <ng-include src="'modules/table/partials/modals/editTable.html'"></ng-include>
+    <ng-include src="'modules/table/partials/modals/deleteTable.html'"></ng-include>
+</section>
+<footer class="main-footer navbar-fixed-bottom">
+    <a style="float: right;" class="btn btn-social btn-bitbucket" onclick="$('#addTable').modal('show')">
+        <i class="fa fa-plus-circle"></i> Ajouter un produit
+    </a>
+</footer>

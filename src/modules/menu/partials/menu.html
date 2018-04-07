@@ -1,11 +1,11 @@
 <section class="content no-padding">
-    <div class="col-md-10 col-md-offset-1 no-padding" data-ng-if="pCtrl.products.length">
+    <div class="col-md-10 col-md-offset-1 no-padding" data-ng-if="mCtrl.menus.length">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Produits</h3>
+                <h3 class="box-title">Menus</h3>
                 <div class="box-tools">
                     <div class="input-group input-group-sm" style="width: 150px;">
-                        <input type="text" data-ng-model="pCtrl.search" name="table_search"
+                        <input type="text" data-ng-model="mCtrl.search" name="table_search"
                                class="form-control pull-right" placeholder="Rechercher">
                     </div>
                 </div>
@@ -14,29 +14,29 @@
             <div class="box-body no-padding">
                 <table class="table table-striped">
                     <tbody>
-                    <tr class="fixed fixed-top">
+                    <tr>
                         <th style="width: 30%; text-align: center;">Nom</th>
                         <th style="text-align: center;">Prix</th>
                         <th style="width: 20%; text-align: center;">Actif</th>
                         <th class="float-right" style="width: 30%"></th>
                     </tr>
-                    <tr data-ng-repeat="product in pCtrl.products | filter: pCtrl.search track by product._id" data-ng-hide="product.removed">
-                        <td data-ng-bind="product.name" style="text-align: center; vertical-align: middle;"></td>
-                        <td style="text-align: center; vertical-align: middle;"><span class="badge bg-blue">{{ product.price.toString() + "€" }}</span></td>
+                    <tr data-ng-repeat="menu in mCtrl.menus | filter: mCtrl.search" data-ng-hide="menu.removed">
+                        <td data-ng-bind="menu.name" style="text-align: center; vertical-align: middle;"></td>
+                        <td style="text-align: center; vertical-align: middle;"><span class="badge bg-blue">{{ menu.price.toString() + "€" }}</span></td>
                         <td style="vertical-align: middle; text-align: center;">
                             <button class="btn"
-                                    data-ng-class="{'btn-default': !product.enabled, 'btn-success': product.enabled}"
-                                    data-ng-click="pCtrl.toggleProductEnabled(product)">
-                                {{ product.enabled ? "Oui" : "Non" }}
+                                    data-ng-class="{'btn-default': !menu.enabled, 'btn-success': menu.enabled}"
+                                    data-ng-click="mCtrl.toggleMenuEnabled(menu)">
+                                {{ menu.enabled ? "Oui" : "Non" }}
                             </button>
                         </td>
                         <td style="vertical-align: middle; text-align: center;">
                             <div class="btn-group">
                                 <button type="button" class="btn btn-warning"
-                                        data-ng-click="pCtrl.showEditProduct(product)"><i class="fa fa-edit"></i>
+                                        data-ng-click="mCtrl.showEditMenu(menu)"><i class="fa fa-edit"></i>
                                 </button>
                                 <button type="button" class="btn btn-default btn-danger"
-                                        data-ng-click="pCtrl.showDeleteProduct(product)"><i class="fa fa-trash"></i>
+                                        data-ng-click="mCtrl.showDeleteMenu(menu)"><i class="fa fa-trash"></i>
                                 </button>
                             </div>
                         </td>
@@ -48,19 +48,19 @@
         </div>
         <!-- /.box -->
     </div>
-    <div class="col-md-10 col-md-offset-1" data-ng-if="!pCtrl.products.length">
+    <div class="col-md-10 col-md-offset-1" data-ng-if="!mCtrl.menus.length">
         <div class="callout callout-info">
-            <h4>Aucun produit trouvé</h4>
+            <h4>Aucun menu trouvé</h4>
 
-            <p>Créez votre premier produit !</p>
+            <p>Composez votre premier menu !</p>
         </div>
     </div>
-    <ng-include src="'modules/product/partials/modals/addProduct.html'"></ng-include>
-    <ng-include src="'modules/product/partials/modals/editProduct.html'"></ng-include>
-    <ng-include src="'modules/product/partials/modals/deleteProduct.html'"></ng-include>
+    <ng-include src="'modules/menu/partials/modals/addMenu.html'"></ng-include>
+    <ng-include src="'modules/menu/partials/modals/editMenu.html'"></ng-include>
+    <ng-include src="'modules/menu/partials/modals/deleteMenu.html'"></ng-include>
 </section>
 <footer class="main-footer navbar-fixed-bottom">
-    <a style="float: right;" class="btn btn-social btn-bitbucket" onclick="$('#addProduct').modal('show')">
-        <i class="fa fa-plus-circle"></i> Ajouter un produit
+    <a style="float: right;" class="btn btn-social btn-bitbucket" onclick="$('#addMenu').modal('show')">
+        <i class="fa fa-plus-circle"></i> Ajouter un menu
     </a>
 </footer>

@@ -12,6 +12,8 @@ angular.module("app.common")
             data: {
                 globalLoader: true
             },
+            controller: "commonCtrl",
+            controllerAs: "cCtrl",
             templateUrl: "modules/common/partials/home.html"
         }).state({
             name: 'main',

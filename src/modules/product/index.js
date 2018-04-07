@@ -12,7 +12,7 @@ angular.module("app.product")
                 products: function (productService, $rootScope) {
                     return productService.get().then(function (res) {
                         return res.data.products;
-                    });
+                    }).catch(function (reason) { return [] });
                 }
             },
             controller: "productCtrl",
