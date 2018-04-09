@@ -22,5 +22,5 @@ function tableService($http, REST) {
     return self;
 }
 
-angular.module("app.product")
+angular.module("app.table")
     .factory("tableService", tableService);

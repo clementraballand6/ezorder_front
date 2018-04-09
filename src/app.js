@@ -20,6 +20,7 @@ require('./modules/menus');
 require('./modules/menu');
 require('./modules/product');
 require('./modules/table');
+require('./modules/order');
 
 var deps = [
     "ngAnimate",
@@ -32,7 +33,8 @@ var deps = [
     "app.menus",
     "app.menu",
     "app.product",
-    "app.table"
+    "app.table",
+    "app.order"
 ];
 
 var restUrls = {

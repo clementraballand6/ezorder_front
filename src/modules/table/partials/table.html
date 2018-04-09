@@ -45,9 +45,9 @@
     </div>
     <div class="col-md-10 col-md-offset-1" data-ng-if="!tCtrl.tables.length">
         <div class="callout callout-info">
-            <h4>Aucun produit trouvé</h4>
+            <h4>Aucune table trouvée</h4>
 
-            <p>Créez votre premier produit !</p>
+            <p>Appuyez sur "ajouter une table"</p>
         </div>
     </div>
     <ng-include src="'modules/table/partials/modals/addTable.html'"></ng-include>
@@ -56,6 +56,6 @@
 </section>
 <footer class="main-footer navbar-fixed-bottom">
     <a style="float: right;" class="btn btn-social btn-bitbucket" onclick="$('#addTable').modal('show')">
-        <i class="fa fa-plus-circle"></i> Ajouter un produit
+        <i class="fa fa-plus-circle"></i> Ajouter une table
     </a>
 </footer>
