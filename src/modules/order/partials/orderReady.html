@@ -1,5 +1,5 @@
 <section class="content no-padding">
-    <div class="col-md-10 col-md-offset-1 no-padding" data-ng-if="oCtrl.orders.length">
+    <div class="col-md-10 col-md-offset-1 no-padding" data-ng-if="oCtrl.filteredOrders.length">
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">Commandes</h3>
@@ -16,23 +16,20 @@
                     <tbody>
                     <tr class="fixed fixed-top">
                         <th style="width: 5%; text-align: center;">#</th>
-                        <th style="text-align: center;">Table</th>
-                        <th style="width: 10%; text-align: center;">Création</th>
+                        <th style="text-align: center; width: 5%;">Table</th>
+                        <th style="text-align: center;">Création</th>
                         <th style="width: 10%; text-align: center;">Montant</th>
-                        <th class="float-right" style="width: 30%"></th>
+                        <th class="float-right" style="width: 15%"></th>
                     </tr>
-                    <tr data-ng-repeat="order in oCtrl.orders | filter: oCtrl.search track by order._id" data-ng-hide="order.removed">
+                    <tr data-ng-repeat="order in oCtrl.filteredOrders | filter: oCtrl.search | orderBy: oCtrl.passedTime" data-ng-hide="order.removed">
                         <td data-ng-bind="order.num" style="font-style: italic; text-align: center; vertical-align: middle;"></td>
                         <td style="vertical-align: middle; text-align: center;" data-ng-bind="oCtrl.getTable(order.table).num">
-                        <td style="vertical-align: middle; text-align: center;">{{ oCtrl.toTimestamp(order.createdAt) | date:"dd'/'MM HH:mm" }}</td>
+                        <td style="vertical-align: middle; text-align: center;">{{ oCtrl.getPassedTime(order.createdAt) | timeAgo }}</td>
                         <td style="text-align: center; vertical-align: middle;"><span class="badge bg-blue">{{ oCtrl.getTotal(order) + "€" }}</span></td>
                         <td style="vertical-align: middle; text-align: center;">
                             <div class="btn-group">
                                 <button type="button" class="btn btn-warning"
                                         data-ng-click="oCtrl.edit(order)"><i class="fa fa-edit"></i>
-                                </button>
-                                <button type="button" class="btn btn-default btn-danger"
-                                        data-ng-click="oCtrl.showDeleteOrder(order)"><i class="fa fa-trash"></i>
                                 </button>
                             </div>
                         </td>
@@ -44,11 +41,11 @@
         </div>
         <!-- /.box -->
     </div>
-    <div class="col-md-10 col-md-offset-1" data-ng-if="!oCtrl.orders.length">
+    <div class="col-md-10 col-md-offset-1" data-ng-if="!oCtrl.filteredOrders.length">
         <div class="callout callout-info">
-            <h4>Aucune commande trouvée</h4>
+            <h4>Aucune commande récente</h4>
 
-            <p>Créer votre première commande dès maintenant !</p>
+            <p>Créer une commande dès maintenant !</p>
         </div>
     </div>
     <ng-include src="'modules/order/partials/modals/addOrder.html'"></ng-include>

@@ -1,9 +1,9 @@
-function orderCtrl(orderDetails, tables, orderService, ngToast, $scope, $state) {
+function orderCtrl(orderDetails, initialOrder, tables, orderService, ngToast, $scope, $state) {
     var self = this;
     console.log(orderDetails);
     self.order = orderDetails.order;
     self.orderContent = self.order.products.concat(self.order.menus);
-    self.initialOrder = angular.copy(self.order);
+    self.initialOrder = initialOrder;
     self.products = orderDetails.products;
     self.menus = orderDetails.menus;
     self.contents = self.products.concat(self.menus).filter(function (c) {
@@ -15,8 +15,12 @@ function orderCtrl(orderDetails, tables, orderService, ngToast, $scope, $state) 
 
     $scope.$on('$destroy', function () {
         // save order
-        if (!objectEqual(self.order, self.initialOrder)) orderService.update(rebuildObject());
+        save();
     });
+
+    function save() {
+        if (!objectEqual(rebuildObject(), self.initialOrder)) orderService.update(rebuildObject());
+    }
 
     function hasEditRights() {
         if (self.order.ready) {
@@ -67,6 +71,7 @@ function orderCtrl(orderDetails, tables, orderService, ngToast, $scope, $state) 
         } else if (type === "+") {
             content.quantity++;
         }
+        save();
     }
 
     self.getTable = function (id) {
@@ -135,6 +140,8 @@ function orderCtrl(orderDetails, tables, orderService, ngToast, $scope, $state) 
         self.contents = self.contents.filter(function (el) {
             return el._id !== content._id;
         })
+        save();
+        console.log(self.order);
     }
 
     self.deleteContent = function () {

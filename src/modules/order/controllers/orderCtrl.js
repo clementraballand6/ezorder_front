@@ -4,11 +4,31 @@ function orderCtrl(ordersDetails, tables, orderService, ngToast, $filter, $state
     self.products = ordersDetails.products;
     self.menus = ordersDetails.menus;
     self.tables = tables;
+
     self.newOrder = {
-        places: 0
-    };
+        table: null,
+        products: [],
+        menus: []
+    }
 
     console.log(self.orders);
+
+    function getHours(s) {
+        var ms = s % 1000;
+        s = (s - ms) / 1000;
+        var secs = s % 60;
+        s = (s - secs) / 60;
+        var mins = s % 60;
+        var hrs = (s - mins) / 60;
+        return hrs;
+    }
+
+    self.filteredOrders = self.orders.filter(function (el) {
+        var now = new Date().getTime();
+        var ts = new Date(el.createdAt).getTime();
+        var hours = getHours(now - ts);
+        return hours < 1;
+    })
 
     function objectEqual(a, b) {
         var c = angular.toJson(angular.fromJson(angular.toJson(a)));
@@ -18,7 +38,9 @@ function orderCtrl(ordersDetails, tables, orderService, ngToast, $filter, $state
 
     function resetNewOrder() {
         self.newOrder = {
-            places: 0
+            table: null,
+            products: [],
+            menus: []
         }
     }
 
@@ -30,6 +52,17 @@ function orderCtrl(ordersDetails, tables, orderService, ngToast, $filter, $state
         el.num = order.num;
         el.desc = order.desc;
         el.places = order.places;
+    }
+
+    self.getPassedTime = function (time) {
+        var now = new Date().getTime();
+        var ts = self.toTimestamp(time);
+
+        return now - ts;
+    }
+
+    self.passedTime = function (order) {
+        return self.getPassedTime(order.createdAt);
     }
 
     self.getTable = function (id) {
@@ -127,13 +160,14 @@ function orderCtrl(ordersDetails, tables, orderService, ngToast, $filter, $state
         orderService.add(self.newOrder)
             .then(function (res) {
                 $('#addOrder').modal('hide');
-                ngToast.success("Order ajoutée");
+                ngToast.success("Commande ajoutée");
                 self.orders.push(res.data.order);
                 resetNewOrder();
+                $state.go("main.editOrder", {id: res.data.order._id});
             })
             .catch(function (err) {
                 $('#addOrder').modal('hide');
-                ngToast.danger("Erreur lors de la création de la order");
+                ngToast.danger("Erreur lors de la création de la commande");
             })
     }
 
@@ -141,13 +175,13 @@ function orderCtrl(ordersDetails, tables, orderService, ngToast, $filter, $state
         orderService.delete(self.order)
             .then(function () {
                 $('#deleteOrder').modal('hide');
-                ngToast.success("Order supprimée");
+                ngToast.success("Commande supprimée");
                 var el = $filter('filter')(self.orders, {_id: self.order._id})[0];
                 el.removed = true;
             })
             .catch(function (err) {
                 $('#deleteOrder').modal('hide');
-                ngToast.danger("Erreur lors de la suppression de la order");
+                ngToast.danger("Erreur lors de la suppression de la commande");
             })
     }
 
@@ -155,4 +189,24 @@ function orderCtrl(ordersDetails, tables, orderService, ngToast, $filter, $state
 }
 
 angular.module("app.order")
+    .filter('timeAgo', function () {
+        return function (s) {
+            var ms = s % 1000;
+            s = (s - ms) / 1000;
+            var secs = s % 60;
+            s = (s - secs) / 60;
+            var mins = s % 60;
+            var hrs = (s - mins) / 60;
+
+            if (hrs > 0) {
+                var format = "Il y a " + hrs + " heure(s)";
+            } else if (mins > 0) {
+                var format = "Il y a " + mins + " minute(s)";
+            } else {
+                var format = "Il y a " + secs + " seconde(s)";
+            }
+
+            return format;
+        };
+    })
     .controller("orderCtrl", orderCtrl);

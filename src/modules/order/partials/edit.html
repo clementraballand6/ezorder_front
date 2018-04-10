@@ -1,5 +1,5 @@
 <section class="content no-padding">
-    <div class="col-md-10 col-md-offset-1 no-padding">
+    <div class="col-md-10 col-md-offset-1 no-padding" data-ng-if="oCtrl.orderContent.length">
         <div class="box box-default">
             <div class="box-body">
                 <div class="row">
@@ -81,6 +81,11 @@
                 </table>
             </div>
             <!-- /.box-body -->
+        </div>
+    </div>
+    <div class="col-md-10 col-md-offset-1" data-ng-if="!oCtrl.orderContent.length">
+        <div class="callout callout-info">
+            <h4>Aucun contenu dans la commande</h4>
         </div>
     </div>
     <ng-include src="'modules/order/partials/modals/addContent.html'"></ng-include>

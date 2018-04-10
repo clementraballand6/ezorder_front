@@ -1,11 +1,11 @@
-<div class="modal fade" id="addTable">
+<div class="modal fade" id="addOrder">
     <div class="modal-dialog">
-        <form data-ng-submit="tCtrl.addTable()">
+        <form data-ng-submit="oCtrl.addOrder()">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Ajouter une table</h4>
+                    <h4 class="modal-title">Ajouter une commande</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -13,19 +13,14 @@
                             <div class="box box-default">
                                 <div class="box-body">
                                     <div class="row margin-bottom">
-                                        <div class="col-xs-7">
-                                            <input type="text" data-ng-model="tCtrl.newTable.num" required
-                                                   class="form-control" placeholder="Numéro">
-                                        </div>
-                                        <div class="col-xs-5">
-                                            <input type="number" data-ng-model="tCtrl.newTable.places"
-                                                   placeholder="Places" step="1" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="row margin-bottom">
                                         <div class="col-xs-12">
-                                            <textarea class="form-control" placeholder="Description"
-                                                      data-ng-model="tCtrl.newTable.desc"></textarea>
+                                            <div class="input-group">
+                                                <select id="category" class="form-control"
+                                                        data-ng-model="oCtrl.newOrder.table">
+                                                    <option data-ng-repeat="table in oCtrl.tables" value="{{table._id}}">{{table.desc}}
+                                                    </option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -37,7 +32,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Annuler</button>
                     <button type="submit" class="btn btn-success"
-                            data-ng-class="{'disabled': tCtrl.blockEdition()}">Enregistrer
+                            data-ng-class="{'disabled': !oCtrl.newOrder.table}">Créer
                     </button>
                 </div>
             </div>
