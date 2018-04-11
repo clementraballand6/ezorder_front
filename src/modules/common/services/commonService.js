@@ -32,8 +32,8 @@ function commonService($http, REST, authService, ngToast, $state, $rootScope) {
             console.log("socket kitchen");
             window.socket.off("order.ready");
             window.socket.off("order.new");
-            window.socket.on("order.new", function (id) {
-                console.log(id);
+            window.socket.on("order.new", function (order) {
+                console.log("");
                 $rootScope.readyOrdersCount = 1;
                 $rootScope.orderNumber = order.id;
                 $rootScope.orderId = order._id;

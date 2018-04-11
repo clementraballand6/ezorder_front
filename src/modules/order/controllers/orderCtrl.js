@@ -12,6 +12,7 @@ function orderCtrl(ordersDetails, tables, orderService, ngToast, $filter, $state
     }
 
     window.socket.on("order.ready", function (order) {
+        console.log(order);
         orderService.getData(order._id)
             .then(function (res) {
                 self.filteredOrders.push(res.order)
