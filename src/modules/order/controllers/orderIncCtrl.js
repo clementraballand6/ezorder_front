@@ -97,6 +97,7 @@ function orderCtrl(ordersDetails, tables, orderService, ngToast, $filter, $state
                     id: self.selectedOrder.num,
                     table: self.getTable(self.selectedOrder.table).num
                 })
+                self.selectedOrder = null;
             })
             .catch(function (reason) {
                 ngToast.danger("Erreur lors de la validation")
