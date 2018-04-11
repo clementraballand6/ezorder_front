@@ -3,7 +3,7 @@
     <section class="sidebar">
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
-            <li ui-sref-active="active" data-ng-if="meCtrl.type === 'kitchen'">
+            <li ui-sref-active="active" data-ng-if="$root.type === 'kitchen'">
                 <a ui-sref="main.orderIncoming">
                     <i class="fa fa-tasks"></i> <span>Commandes en cours</span>
                     <span class="pull-right-container">
@@ -11,7 +11,7 @@
             </span>
                 </a>
             </li>
-            <li ui-sref-active="active" data-ng-if="meCtrl.type === 'room'">
+            <li ui-sref-active="active" data-ng-if="$root.type === 'room'">
                 <a ui-sref="main.orderReady">
                     <i class="fa fa-tasks"></i> <span>Commandes prêtes</span>
                     <span class="pull-right-container">
