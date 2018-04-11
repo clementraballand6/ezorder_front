@@ -31,7 +31,7 @@
                         <td style="vertical-align: middle; text-align: center;">{{ oCtrl.getPassedTime(order.createdAt)
                             | timeAgo }}
                         </td>
-                        <td style="text-align: center; vertical-align: middle;"><span class="badge bg-blue">{{ oCtrl.getTotal(order) + "€" }}</span>
+                        <td style="text-align: center; vertical-align: middle;"><span class="badge bg-blue">{{ oCtrl.getTotal(order).toPrecision(3).toString() + "€" }}</span>
                         </td>
                         <td style="vertical-align: middle; text-align: center;">
                             <div class="btn-group">

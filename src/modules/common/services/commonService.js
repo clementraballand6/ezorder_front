@@ -34,6 +34,13 @@ function commonService($http, REST, authService, ngToast, $state, $rootScope) {
             window.socket.off("order.new");
             window.socket.on("order.new", function (id) {
                 console.log(id);
+                $rootScope.readyOrdersCount = 1;
+                $rootScope.orderNumber = order.id;
+                $rootScope.orderId = order._id;
+                $rootScope.orderTableNumber = order.table;
+                $rootScope.showNotif = true;
+                ngToast.info("Une nouvelle commande est arrivée !")
+                $rootScope.$apply();
             })
         } else {
             console.log("socket order");

@@ -28,7 +28,7 @@
                         <td data-ng-bind="order.num" style="font-style: italic; text-align: center; vertical-align: middle;"></td>
                         <td style="vertical-align: middle; text-align: center;" data-ng-bind="oCtrl.getTable(order.table).num">
                         <td style="vertical-align: middle; text-align: center;">{{ oCtrl.toTimestamp(order.createdAt) | date:"dd'/'MM HH:mm" }}</td>
-                        <td style="text-align: center; vertical-align: middle;"><span class="badge bg-blue">{{ oCtrl.getTotal(order) + "€" }}</span></td>
+                        <td style="text-align: center; vertical-align: middle;"><span class="badge bg-blue">{{ oCtrl.getTotal(order).toPrecision(3).toString() + "€" }}</span></td>
                         <td style="vertical-align: middle; text-align: center;">
                             <div class="btn-group">
                                 <button type="button" class="btn btn-warning"

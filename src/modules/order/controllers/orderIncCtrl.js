@@ -11,6 +11,13 @@ function orderCtrl(ordersDetails, tables, orderService, ngToast, $filter, $state
         menus: []
     }
 
+    window.socket.on("order.new", function (order) {
+        orderService.getData(order._id)
+            .then(function (res) {
+                self.filteredOrders.push(res.order)
+            }).catch(function (reason) { return [] })
+    })
+
     console.log(self.orders);
 
     function getHours(s) {

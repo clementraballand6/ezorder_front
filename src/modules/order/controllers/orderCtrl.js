@@ -11,6 +11,13 @@ function orderCtrl(ordersDetails, tables, orderService, ngToast, $filter, $state
         menus: []
     }
 
+    window.socket.on("order.ready", function (order) {
+        orderService.getData(order._id)
+            .then(function (res) {
+                self.filteredOrders.push(res.order)
+            }).catch(function (reason) { return [] })
+    })
+
     console.log(self.orders);
 
     function getHours(s) {
@@ -161,6 +168,11 @@ function orderCtrl(ordersDetails, tables, orderService, ngToast, $filter, $state
             .then(function (res) {
                 $('#addOrder').modal('hide');
                 ngToast.success("Commande ajoutée");
+                window.socket.emit("order.new", {
+                    _id: res.data.order._id,
+                    id: res.data.order.num,
+                    table: res.data.order.table
+                })
                 self.orders.push(res.data.order);
                 resetNewOrder();
                 $state.go("main.editOrder", {id: res.data.order._id});
