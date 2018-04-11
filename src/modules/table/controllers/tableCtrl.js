@@ -4,7 +4,9 @@ function tableCtrl(tables, tableService, ngToast, $filter) {
     self.tables = tables;
 
     self.newTable = {
-        places: 0
+        places: "",
+        num: "",
+        desc: ""
     };
 
     function objectEqual(a, b) {
@@ -15,7 +17,9 @@ function tableCtrl(tables, tableService, ngToast, $filter) {
 
     function resetNewTable() {
         self.newTable = {
-            places: 0
+            places: "",
+            num: "",
+            desc: ""
         }
     }
 

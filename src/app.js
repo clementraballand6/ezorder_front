@@ -1,6 +1,10 @@
 // libs
 window["jQuery"] = require('jquery/dist/jquery.min');
 window["$"] = window["jQuery"];
+var io = require('socket.io-client');
+var socketUrl = "http://" + location.hostname + ":3333"
+window.socket = io.connect(socketUrl);
+
 require('popper.js/dist/umd/popper.min');
 require('bootstrap/dist/js/bootstrap.min');
 require('jquery-slimscroll/jquery.slimscroll.min');
@@ -80,6 +84,7 @@ function stateEvents($rootScope, $transitions, $state, authService) {
         sidebar("close");
         $rootScope.content.isLoading = true;
         if (!authService.isAuthentified() && trans.to().name !== "login" && trans.to().name !== "register") {
+            console.log("redirect");
             $rootScope.currentState = trans.to();
             return trans.router.stateService.target('login');
         } else if (authService.isAuthentified() && trans.to().name === "login") {
@@ -114,18 +119,30 @@ angular.module('app', deps)
     .run(function (commonService, $state, $rootScope, authService) {
         $rootScope.content = {isLoading: false};
         $rootScope.currentState = $state.current;
-        commonService.setUserType("order");commonService.isAuth().then(function (res) {
+        $rootScope.readyOrdersCount = null;
+
+        $rootScope.onOrderNotifClicked = function () {
+            $rootScope.showNotif = false;
+            $rootScope.readyOrdersCount = null;
+            $state.go("main.editOrder", {id: $rootScope.orderId});
+        };
+
+        commonService.isAuth().then(function (res) {
             if (!res.data.authentified) {
                 console.log("not auth");
                 authService.setAuthentified(false);
                 $state.go("login")
+            } else {
+                commonService.setUserType(localStorage.getItem("userType"));
+                $rootScope.labels = commonService.user.labels;
+                $rootScope.type = commonService.user.type;
             }
         })
     })
     .run(stateEvents)
     .run(commonRun)
     .config(function ($urlRouterProvider, $httpProvider) {
-        $urlRouterProvider.otherwise('/');
+        $urlRouterProvider.otherwise('/orderReady');
         $httpProvider.defaults.withCredentials = true;
     })
     .config(handle401)

@@ -21,47 +21,40 @@
                 <li class="dropdown messages-menu">
                     <a class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-bell-o"></i>
-                        <span style="font-size: 13px;" class="label label-success">4</span>
+                        <span style="font-size: 13px;" class="label label-success">{{ $root.readyOrdersCount }}</span>
                     </a>
-                    <ul class="dropdown-menu">
-                        <li class="header">2 commandes en cours<br />3 commandes prêtes</li>
+                    <ul class="dropdown-menu" data-ng-if="$root.showNotif">
                         <li>
                             <!-- inner menu: contains the actual data -->
                             <ul class="menu">
                                 <li><!-- start message -->
-                                    <a href="#">
+                                    <a data-ng-click="$root.onOrderNotifClicked()">
                                         <div class="pull-left">
                                             <i class="fa fa-check"></i>
                                         </div>
                                         <h4>
-                                            Commande n°1225
-                                            <small><i class="fa fa-clock-o"></i> 30 sec</small>
+                                            Commande n°{{ $root.orderNumber }}
+                                            <small><i class="fa fa-clock-o"></i> Maintenant</small>
                                         </h4>
-                                        <p>Table 5</p>
+                                        <p>Table {{ $root.orderTableNumber }}</p>
                                     </a>
                                 </li>
+                                <!-- end message -->
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="dropdown-menu" data-ng-if="!$root.showNotif">
+                        <li>
+                            <!-- inner menu: contains the actual data -->
+                            <ul class="menu">
                                 <li><!-- start message -->
-                                    <a href="#">
+                                    <a data-ng-click="$root.onOrderNotifClicked()">
                                         <div class="pull-left">
                                             <i class="fa fa-check"></i>
                                         </div>
                                         <h4>
-                                            Commande n°1228
-                                            <small><i class="fa fa-clock-o"></i> 1 min</small>
+                                            Aucune notification
                                         </h4>
-                                        <p>Table 3</p>
-                                    </a>
-                                </li>
-                                <li><!-- start message -->
-                                    <a href="#">
-                                        <div class="pull-left">
-                                            <i class="fa fa-check"></i>
-                                        </div>
-                                        <h4>
-                                            Commande n°1224
-                                            <small><i class="fa fa-clock-o"></i> 3 min</small>
-                                        </h4>
-                                        <p>Table 1</p>
                                     </a>
                                 </li>
                                 <!-- end message -->
@@ -73,20 +66,20 @@
                 <li class="dropdown user user-menu">
                     <a class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-user-circle"></i>
-                        <span class="hidden-xs">{{ meCtrl.labels.header }}</span>
+                        <span class="hidden-xs">{{ $root.labels.header }}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
                             <i class="fa fa-5x fa-edit"></i>
                             <p>
-                                {{ meCtrl.labels.headerBox }}
+                                {{ $root.labels.headerBox }}
                             </p>
                         </li>
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a class="btn btn-default btn-flat">{{ meCtrl.labels.switchTo }}</a>
+                                <a class="btn btn-default btn-flat" data-ng-click="meCtrl.setUserType($root.type ==='kitchen' ? 'order' : 'kitchen')">{{ $root.labels.switchTo }}</a>
                             </div>
                             <div class="pull-right">
                                 <a class="btn btn-default btn-flat" data-ng-click="meCtrl.disconnect()">Deconnexion</a>

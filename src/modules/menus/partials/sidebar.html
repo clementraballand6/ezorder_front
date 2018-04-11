@@ -3,7 +3,15 @@
     <section class="sidebar">
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
-            <li ui-sref-active="active">
+            <li ui-sref-active="active" data-ng-if="meCtrl.type === 'kitchen'">
+                <a ui-sref="main.orderIncoming">
+                    <i class="fa fa-tasks"></i> <span>Commandes en cours</span>
+                    <span class="pull-right-container">
+              <small class="label pull-right bg-green">2</small>
+            </span>
+                </a>
+            </li>
+            <li ui-sref-active="active" data-ng-if="meCtrl.type === 'room'">
                 <a ui-sref="main.orderReady">
                     <i class="fa fa-tasks"></i> <span>Commandes prêtes</span>
                     <span class="pull-right-container">
@@ -29,11 +37,6 @@
             <li ui-sref-active="active">
                 <a ui-sref="main.table">
                     <i class="fa fa-map-marker"></i> <span>Tables</span>
-                </a>
-            </li>
-            <li ui-sref-active="active">
-                <a ui-sref="main.">
-                    <i class="fa fa-gear"></i> <span>Paramètres</span>
                 </a>
             </li>
         </ul>

@@ -7,7 +7,7 @@ function tableService($http, REST) {
     }
 
     self.add = function (product) {
-        product.enabled = true;
+        product.num = +product.num;
         return $http.post(REST.ezorders + "/customer/room/tables", product);
     }
 

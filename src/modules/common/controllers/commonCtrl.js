@@ -15,7 +15,7 @@ function commonCtrl(commonService, authService, ngToast, $state, $rootScope) {
 
     function onAuthSuccess() {
         authService.setAuthentified(true);
-        $state.go('main.home');
+        $state.go('choice');
     }
 
     function onAuthError() {

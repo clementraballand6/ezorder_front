@@ -23,13 +23,13 @@
 </head>
 <body data-ng-controller="menusCtrl as meCtrl" class="hold-transition"
       data-ng-class="
-      {'login-page hold-transition': $root.currentState.name === 'login',
+      {'login-page hold-transition': $root.currentState.name === 'login' || $root.currentState.name === 'choice',
       'register-page hold-transition': $root.currentState.name === 'register',
       'fixed skin-red sidebar-mini': $root.currentState.name.indexOf('main.') !== -1}
 ">
 <loader data-ng-if="$root.isLoading"></loader>
 <toast></toast>
-<ui-view></ui-view>
+<ui-view data-ng-if="!$root.isLoading"></ui-view>
 <script src="bundle.js"></script>
 <script>
     jQuery(document).ready(function () {

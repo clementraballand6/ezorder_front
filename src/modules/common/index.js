@@ -7,15 +7,6 @@ require('./services/commonService');
 angular.module("app.common")
     .config(function ($stateProvider) {
         $stateProvider.state({
-            name: 'main.home',
-            url: '/',
-            data: {
-                globalLoader: true
-            },
-            controller: "commonCtrl",
-            controllerAs: "cCtrl",
-            templateUrl: "modules/common/partials/home.html"
-        }).state({
             name: 'main',
             templateUrl: "modules/common/partials/main.html"
         }).state({
@@ -30,6 +21,10 @@ angular.module("app.common")
             controller: "commonCtrl",
             controllerAs: "cCtrl",
             templateUrl: "modules/common/partials/register.html"
+        }).state({
+            name: 'choice',
+            url: '/choice',
+            templateUrl: "modules/common/partials/choice.html"
         })
     })
     .directive('loader', function () {

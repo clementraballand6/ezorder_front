@@ -1,11 +1,11 @@
-function commonService($http, REST, authService, ngToast, $state) {
+function commonService($http, REST, authService, ngToast, $state, $rootScope) {
     var self = this;
 
     self.user = {};
 
     self.users = {
         kitchen: {
-            type: "order",
+            type: "kitchen",
             labels: {
                 main: "cuisine",
                 switchTo: "Passer en salle",
@@ -14,7 +14,7 @@ function commonService($http, REST, authService, ngToast, $state) {
             }
         },
         order: {
-            type: "order",
+            type: "room",
             labels: {
                 main: "salle",
                 switchTo: "Passer en cuisine",
@@ -25,7 +25,26 @@ function commonService($http, REST, authService, ngToast, $state) {
     }
 
     self.setUserType = function (type) {
-        self.user = self.users[type]
+        self.user = self.users[type];
+        localStorage.setItem("userType", type);
+        if (type === "kitchen") {
+            window.socket.off("order.ready");
+            window.socket.on("order.new", function (id) {
+                console.log(id);
+            })
+        } else {
+            window.socket.off("order.new");
+            window.socket.on("order.ready", function (order) {
+                console.log("ready");
+                $rootScope.readyOrdersCount = 1;
+                $rootScope.orderNumber = order.id;
+                $rootScope.orderId = order._id;
+                $rootScope.orderTableNumber = order.table;
+                $rootScope.showNotif = true;
+                ngToast.info("Une nouvelle commande est prête !")
+                $rootScope.$apply();
+            })
+        }
     }
 
     self.disconnect = function () {

@@ -23,12 +23,16 @@ function orderCtrl(ordersDetails, tables, orderService, ngToast, $filter, $state
         return hrs;
     }
 
-    self.filteredOrders = self.orders.filter(function (el) {
-        var now = new Date().getTime();
-        var ts = new Date(el.createdAt).getTime();
-        var hours = getHours(now - ts);
-        return hours < 1 && el.ready;
-    })
+    function refreshFilteredOrders() {
+        self.filteredOrders = self.orders.filter(function (el) {
+            var now = new Date().getTime();
+            var ts = new Date(el.createdAt).getTime();
+            var hours = getHours(now - ts);
+            return hours < 1 && !el.ready;
+        })
+    }
+
+    refreshFilteredOrders();
 
     function objectEqual(a, b) {
         var c = angular.toJson(angular.fromJson(angular.toJson(a)));
@@ -71,6 +75,25 @@ function orderCtrl(ordersDetails, tables, orderService, ngToast, $filter, $state
         }) || {};
     }
 
+    self.validatedOrder = function () {
+        var order = angular.copy(self.selectedOrder);
+        order.ready = true;
+        orderService.update(order)
+            .then(function () {
+                ngToast.success("Commande validée");
+                self.filteredOrders = self.filteredOrders.filter(function (el) {
+                    return el._id !== self.selectedOrder._id
+                });
+                window.socket.emit('order.ready', {
+                    _id: self.selectedOrder._id,
+                    id: self.selectedOrder.num,
+                    table: self.getTable(self.selectedOrder.table).num
+                })
+            })
+            .catch(function (reason) {
+                ngToast.danger("Erreur lors de la validation")
+            })
+    }
 
     self.toggleProduct = function (order, product) {
         var index = order.products.indexOf(product._id);
@@ -209,4 +232,4 @@ angular.module("app.order")
             return format;
         };
     })
-    .controller("orderCtrl", orderCtrl);
+    .controller("orderIncCtrl", orderCtrl);

@@ -2,7 +2,17 @@
     height: auto !important;
 }
 
-tr {
+.selected-row {
+    background-color: antiquewhite !important;
+}
+.order-ready {
+    background-color: aquamarine !important;
+}
+.order-notready {
+    background-color: antiquewhite !important;
+}
+
+tr :not(.selected-row) {
     -webkit-transition:all linear 0.8s;
     transition:all linear 0.8s;
 }

@@ -2,6 +2,7 @@ angular.module("app.order", []);
 
 require('./controllers/orderCtrl')
 require('./controllers/editOrderCtrl')
+require('./controllers/orderIncCtrl')
 require('./services/orderService')
 
 angular.module("app.order")
@@ -82,5 +83,28 @@ angular.module("app.order")
                 controller: "editOrderCtrl",
                 controllerAs: "oCtrl",
                 templateUrl: "modules/order/partials/edit.html"
+            })
+            .state({
+                name: 'main.orderIncoming',
+                url: '/orderIncoming',
+                resolve: {
+                    ordersDetails: function (orderService) {
+                        return orderService.getAllData().then(function (data) {
+                            return data;
+                        }).catch(function (reason) {
+                            return []
+                        });
+                    },
+                    tables: function (tableService) {
+                        return tableService.get().then(function (res) {
+                            return res.data.tables;
+                        }).catch(function (reason) {
+                            return []
+                        });
+                    }
+                },
+                controller: "orderIncCtrl",
+                controllerAs: "oCtrl",
+                templateUrl: "modules/order/partials/orderIncoming.html"
             })
     });

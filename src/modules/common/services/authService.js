@@ -2,6 +2,7 @@ function authService(ngToast, $state) {
     var self = this;
 
     self.setAuthentified = function (authentified) {
+        console.log(authentified);
         if (angular.isUndefined(authentified)) authentified = true;
         window.localStorage.setItem("isAuthentified", JSON.stringify(authentified));
     }

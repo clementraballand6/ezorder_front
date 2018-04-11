@@ -10,7 +10,7 @@ function orderCtrl(orderDetails, initialOrder, tables, orderService, ngToast, $s
         return !isContentInOrder(c);
     });
     self.tables = tables;
-    self.order.ready = false;
+
     if (self.order.ready) ngToast.warning("Vous ne pouvez pas editer une commande déjà prête")
 
     $scope.$on('$destroy', function () {
