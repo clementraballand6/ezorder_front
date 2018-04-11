@@ -27,13 +27,18 @@ function commonService($http, REST, authService, ngToast, $state, $rootScope) {
     self.setUserType = function (type) {
         self.user = self.users[type];
         localStorage.setItem("userType", type);
+        console.log("setusertype");
         if (type === "kitchen") {
+            console.log("socket kitchen");
             window.socket.off("order.ready");
+            window.socket.off("order.new");
             window.socket.on("order.new", function (id) {
                 console.log(id);
             })
         } else {
+            console.log("socket order");
             window.socket.off("order.new");
+            window.socket.off("order.ready");
             window.socket.on("order.ready", function (order) {
                 console.log("ready");
                 $rootScope.readyOrdersCount = 1;
