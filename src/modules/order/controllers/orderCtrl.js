@@ -134,6 +134,10 @@ function orderCtrl(ordersDetails, tables, orderService, ngToast, $filter, $state
     }
 
     self.showDeleteOrder = function (order) {
+        if (order.ready) {
+            ngToast.danger("Vous ne pouvez pas supprimer une commande prête");
+            return;
+        }
         self.order = angular.copy(order);
         $('#deleteOrder').modal('show');
     }
