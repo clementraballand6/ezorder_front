@@ -6,10 +6,10 @@
     background-color: antiquewhite !important;
 }
 .order-ready {
-    background-color: aquamarine !important;
+    background-color: #2ecc7199 !important;
 }
 .order-notready {
-    background-color: antiquewhite !important;
+    background-color: #e74c3c59 !important;
 }
 
 tr :not(.selected-row) {

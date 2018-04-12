@@ -172,7 +172,7 @@ function orderCtrl(ordersDetails, tables, orderService, ngToast, $filter, $state
                 window.socket.emit("order.new", {
                     _id: res.data.order._id,
                     id: res.data.order.num,
-                    table: res.data.order.table
+                    table: self.getTable(res.data.order.table).num
                 })
                 self.orders.push(res.data.order);
                 resetNewOrder();
