@@ -15,6 +15,7 @@ function orderService($http, REST, $q, productService, menuService) {
                 })
             }
         });
+        console.log(order);
 
         return order;
     }
@@ -36,6 +37,7 @@ function orderService($http, REST, $q, productService, menuService) {
                 self.orders.forEach(function (el) {
                     o.push(buildOrder(el))
                 });
+                console.log(o);
 
                 return {
                     orders: o,

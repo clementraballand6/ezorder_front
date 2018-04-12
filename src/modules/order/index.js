@@ -16,7 +16,11 @@ angular.module("app.order")
                         return orderService.getAllData().then(function (data) {
                             return data;
                         }).catch(function (reason) {
-                            return []
+                            return {
+                                orders: [],
+                                products: [],
+                                menus: []
+                            }
                         });
                     },
                     tables: function (tableService) {
@@ -39,7 +43,11 @@ angular.module("app.order")
                         return orderService.getAllData().then(function (data) {
                             return data;
                         }).catch(function (reason) {
-                            return []
+                            return {
+                                orders: [],
+                                products: [],
+                                menus: []
+                            }
                         });
                     },
                     tables: function (tableService) {
@@ -92,7 +100,11 @@ angular.module("app.order")
                         return orderService.getAllData().then(function (data) {
                             return data;
                         }).catch(function (reason) {
-                            return []
+                            return {
+                                orders: [],
+                                products: [],
+                                menus: []
+                            }
                         });
                     },
                     tables: function (tableService) {

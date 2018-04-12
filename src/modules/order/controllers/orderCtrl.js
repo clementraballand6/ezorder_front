@@ -1,6 +1,7 @@
 function orderCtrl(ordersDetails, tables, orderService, ngToast, $filter, $state) {
     var self = this;
     self.orders = ordersDetails.orders;
+    console.log(ordersDetails);
     self.products = ordersDetails.products;
     self.menus = ordersDetails.menus;
     self.tables = tables;
