@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html ng-app="app" data-ng-class="{'choice-bg': $root.currentState.name === 'choice'}">
 <head>
     <meta charset="UTF-8">
     <style>
@@ -23,8 +23,9 @@
 </head>
 <body data-ng-controller="menusCtrl as meCtrl" class="hold-transition"
       data-ng-class="
-      {'login-page hold-transition': $root.currentState.name === 'login' || $root.currentState.name === 'choice',
+      {'login-page hold-transition': $root.currentState.name === 'login',
       'register-page hold-transition': $root.currentState.name === 'register',
+      'no-bg login-page hold-transition': $root.currentState.name === 'choice',
       'fixed skin-red sidebar-mini': $root.currentState.name.indexOf('main.') !== -1}
 ">
 <loader data-ng-if="$root.isLoading"></loader>

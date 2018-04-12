@@ -2,6 +2,23 @@
     height: auto !important;
 }
 
+.choice-bg {
+    background-image: url("https://image.freepik.com/photos-libre/plateau-de-table-vide-en-bois-dessus-d-39-arriere-plan-flou_1253-1584.jpg");
+    -webkit-background-size: cover;
+    background-size: cover;
+}
+
+.no-bg {
+    background-color: transparent;
+}
+
+.choice-btn {
+    border: 1px solid;
+    border-radius: 2%;
+    height: 200px;
+    opacity: .9;
+}
+
 .selected-row {
     background-color: antiquewhite !important;
 }
